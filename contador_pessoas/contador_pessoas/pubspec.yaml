@@ -48,6 +48,7 @@ flutter:
   assets:
    - images/dorsobaralho.jpg
    - images/plano-de-fundo.jpg
+   - images/back-stars.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

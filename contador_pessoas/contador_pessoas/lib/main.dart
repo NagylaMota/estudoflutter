@@ -1,3 +1,4 @@
+// import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
 
@@ -13,22 +14,51 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home>{
- int _people = 0;
- String   _infotext = "vaziu";
- 
- void _chagepeople(int delta){
+ String _winner = "marcador de truco";
+//  int _people = 0;
+ int _pontonos = 0;
+ int _pontoeles = 0;
+
+ void _zerar(int delta){
  setState(() {
-  _people += delta;  
-  if (_people < 0){
-    _infotext = "vaziu";
-    _people = 0;
+  _pontonos += delta;  
+  _pontoeles = 0;
+  _pontonos = 0;
+  _winner = "Marcador de truco"; 
+  _pontoeles = _pontoeles;
   }
-  if (_people > 9){
-    _infotext = "cheio";
-    _people = 10;
+ );
   }
-  if ((_people < 9) && (_people > 0)){
-    _infotext = "ha vagas";
+ 
+ 
+ void _changenos(int delta){
+ setState(() {
+   if (_pontoeles <= 11 ){
+  _pontonos += delta;
+  }  
+  if (_pontonos > 11){
+    _winner = "Nos gamanhamos";
+    _pontonos = 12;
+  }
+
+  if (_pontoeles == 12){
+    _pontonos = _pontonos + 0;
+  }
+ });
+}
+
+ void _changeeles(int delta){
+ setState(() {
+    if (_pontonos <= 11 ){
+  _pontoeles += delta;
+  }  
+  if (_pontoeles > 11){
+    _winner = "Eles ganharam";
+    _pontoeles = 12;
+    // _pontonos = _pontonos;
+ }
+  if (_pontonos == 12){
+    _pontoeles = _pontoeles + 0;
   }
  });
 }
@@ -38,7 +68,7 @@ class _HomeState extends State<Home>{
     return Stack (
   children: <Widget>[
     
-    Image.asset("images/plano-de-fundo.jpg",
+    Image.asset("images/back-stars.jpg",
     fit: BoxFit.cover,
     height: 1000.0,
     ),
@@ -47,11 +77,30 @@ class _HomeState extends State<Home>{
   mainAxisAlignment: MainAxisAlignment.center,
   children: <Widget>[
    
-    Text ("pessoas:$_people ", 
-    style: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold,),
-    ),
+
   
-  Row(//linha para colocar os 2 botoes
+  Row(//ROW NOS/ELES
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Padding(
+        padding:EdgeInsets.all(10.0),
+        child:       
+        Text ("Nós:$_pontonos ", 
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 35.0),
+        )),
+
+        Padding(
+        padding:EdgeInsets.all(10.0),
+        child:       
+        Text ("Eles:$_pontoeles", 
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 35.0),
+        )),
+
+    ],
+
+  ),
+
+  Row(//ROW +1 
      mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
       Padding(
@@ -59,26 +108,29 @@ class _HomeState extends State<Home>{
         child:       
         FlatButton(//botao 
         child: Text("+1",
-        style: TextStyle(color: Colors.purple,fontSize: 40.0,),
+        style: TextStyle(color: Colors.white,fontSize: 40.0,),
         ),
         onPressed: () {
-        _chagepeople(1); 
+        _changenos(1); 
         },//colcar uma funçao aqui  
         ),
       ),
+
 
        Padding(
         padding:EdgeInsets.all(10.0),
         child:      
          FlatButton(
-          child: Text("-1",
-          style: TextStyle(color: Colors.purple,fontSize: 40.0,),
+          child: Text("+1",
+          style: TextStyle(color: Colors.white,fontSize: 40.0,),
           ),
         onPressed: () {
-         _chagepeople(-1); 
+         _changeeles(1); 
         },//colcar uma funçao aqui  
+        
          ),
       ),
+
 
 
 
@@ -86,11 +138,174 @@ class _HomeState extends State<Home>{
 
   ),
 
-    Text ("$_infotext", 
+  Row(///ROW +3 
+     mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Padding(
+        padding:EdgeInsets.all(10.0),
+        child:       
+        FlatButton(//botao 
+        child: Text("+3",
+        style: TextStyle(color: Colors.white,fontSize: 40.0,),
+        ),
+        onPressed: () {
+        _changenos(3); 
+        },//colcar uma funçao aqui  
+        ),
+      ),
+
+
+       Padding(
+        padding:EdgeInsets.all(10.0),
+        child:      
+         FlatButton(
+          child: Text("+3",
+          style: TextStyle(color: Colors.white,fontSize: 40.0,),
+          ),
+        onPressed: () {
+        _changeeles(3); 
+        },//colcar uma funçao aqui  
+        
+         ),
+      ),
+
+
+
+
+    ],
+
+  ),
+
+  Row(//ROW +6 
+     mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Padding(
+        padding:EdgeInsets.all(10.0),
+        child:       
+        FlatButton(//botao 
+        child: Text("+6",
+        style: TextStyle(color: Colors.white,fontSize: 40.0,),
+        ),
+        onPressed: () {
+        _changenos(6); 
+        },//colcar uma funçao aqui  
+        ),
+      ),
+
+
+       Padding(
+        padding:EdgeInsets.all(10.0),
+        child:      
+         FlatButton(
+          child: Text("+6",
+          style: TextStyle(color: Colors.white,fontSize: 40.0,),
+          ),
+        onPressed: () {
+         _changeeles(6); 
+        },//colcar uma funçao aqui  
+        
+         ),
+      ),
+
+
+
+
+    ],
+
+  ),
+ 
+  Row(//ROW +9 
+     mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Padding(
+        padding:EdgeInsets.all(10.0),
+        child:       
+        FlatButton(//botao 
+        child: Text("+9",
+        style: TextStyle(color: Colors.white,fontSize: 40.0,),
+        ),
+        onPressed: () {
+        _changenos(9); 
+        },//colcar uma funçao aqui  
+        ),
+      ),
+
+
+       Padding(
+        padding:EdgeInsets.all(10.0),
+        child:      
+         FlatButton(
+          child: Text("+9",
+          style: TextStyle(color: Colors.white,fontSize: 40.0,),
+          ),
+        onPressed: () {
+         _changeeles(9); 
+        },//colcar uma funçao aqui  
+        
+         ),
+      ),
+
+
+
+
+    ],
+
+  ),
+  
+  Row(//ROW +12 
+     mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Padding(
+        padding:EdgeInsets.all(10.0),
+        child:       
+        FlatButton(//botao 
+        child: Text("+12",
+        style: TextStyle(color: Colors.white,fontSize: 40.0,),
+        ),
+        onPressed: () {
+        _changenos(12); 
+        },//colcar uma funçao aqui  
+        ),
+      ),
+
+
+       Padding(
+        padding:EdgeInsets.all(10.0),
+        child:      
+         FlatButton(
+          child: Text("+12",
+          style: TextStyle(color: Colors.white,fontSize: 40.0,),
+          ),
+        onPressed: () {
+         _changeeles(12); 
+        },//colcar uma funçao aqui  
+        
+         ),
+      ),
+
+
+
+
+    ],
+
+  ),  
+    
+
+
+    Text ("$_winner", 
     style: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold, fontSize: 30.0),
     
     ),
-
+    
+    FlatButton(
+          child: Text("Zerar",
+          style: TextStyle(color: Colors.white,fontSize: 40.0,),
+          ),
+        onPressed: () {
+        _zerar(0);
+        },//colcar uma funçao aqui  
+        
+         ),
 
   ],
   )
